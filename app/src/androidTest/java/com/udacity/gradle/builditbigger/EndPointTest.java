@@ -1,5 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
@@ -16,7 +18,7 @@ public class EndPointTest {
     @Test
     public void nonNullAsyncTask() {
 
-        String response = null;
+        String response;
         EndPointAsyncTask asyncTask = new EndPointAsyncTask();
         asyncTask.execute();
 
@@ -26,6 +28,18 @@ public class EndPointTest {
             response = null;
         }
 
-        assertNotNull(response);
+        final String finalResponse = response;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        assertNotNull(finalResponse);
+                    }
+                }, 1000);
+            }
+        }).run();
     }
 }
