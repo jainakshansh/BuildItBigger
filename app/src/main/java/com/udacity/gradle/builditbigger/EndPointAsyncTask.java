@@ -21,6 +21,10 @@ public class EndPointAsyncTask extends AsyncTask<Pair<Context, String>, Void, St
     private Context context;
     private static final String JOKE_KEY = "JOKE";
 
+    public EndPointAsyncTask(Context context) {
+        this.context = context;
+    }
+
     @Override
     protected String doInBackground(Pair<Context, String>... pairs) {
         if (myJokesApi == null) {
@@ -49,8 +53,6 @@ public class EndPointAsyncTask extends AsyncTask<Pair<Context, String>, Void, St
 
     @Override
     protected void onPostExecute(String response) {
-        super.onPostExecute(response);
-
         Intent intent = new Intent(context, JokeActivity.class);
         intent.putExtra(JOKE_KEY, response);
         context.startActivity(intent);
