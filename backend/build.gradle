@@ -27,7 +27,26 @@ dependencies {
     implementation 'com.google.endpoints:endpoints-framework:2.0.9'
     implementation 'javax.inject:javax.inject:1'
 
+    //Adding the Java library to retrieve jokes from it.
+    implementation project(':JokeGen')
+
     implementation 'javax.servlet:servlet-api:2.5'
     implementation 'com.google.api-client:google-api-client:1.23.0'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
+}
+
+// V2: Define deployment configuration using the new App Engine plugin
+// with the appengine closure
+appengine {  // App Engine tasks configuration
+    deploy {   // deploy configuration
+
+        // The following is used for acceptance tests and
+        // is not required for a migration.
+        project = findProperty("appengine.deploy.project")
+        version = findProperty("appengine.deploy.version")
+        def promoteProp = findProperty("appengine.deploy.promote")
+        if (promoteProp != null) {
+            promote = new Boolean(promoteProp)
+        }
+    }
 }

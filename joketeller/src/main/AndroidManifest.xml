@@ -1,9 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.udacity.gradle.joketeller">
-
-    <application>
-        <activity android:name=".JokeActivity"></activity>
-    </application>
-
-</manifest>
+    package="com.udacity.gradle.joketeller" />
