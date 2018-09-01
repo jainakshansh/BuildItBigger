@@ -16,7 +16,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        root.findViewById(R.id.instructions_text_view).setOnClickListener(new View.OnClickListener() {
+        root.findViewById(R.id.tell_joke_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 new EndPointAsyncTask(getContext()).execute();

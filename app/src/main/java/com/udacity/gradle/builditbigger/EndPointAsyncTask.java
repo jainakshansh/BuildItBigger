@@ -3,6 +3,7 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.util.Pair;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -31,6 +32,7 @@ public class EndPointAsyncTask extends AsyncTask<Pair<Context, String>, Void, St
             MyJokesApi.Builder builder = new MyJokesApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
                     .setRootUrl("http://10.0.2.2:8080/_ah/api/")
+                    .setApplicationName(context.getResources().getString(R.string.app_name))
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {
@@ -40,8 +42,6 @@ public class EndPointAsyncTask extends AsyncTask<Pair<Context, String>, Void, St
 
             myJokesApi = builder.build();
         }
-
-        context = pairs[0].first;
 
         try {
             MyBean myBean = myJokesApi.putJoke().execute();
